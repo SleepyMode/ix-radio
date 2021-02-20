@@ -98,9 +98,16 @@ function ix.radio.CanPlayerSay(client, text)
 		client:NotifyLocalized("notNow")
 		return false 
 	end
+	
+	local character = client:GetCharacter()
+	
+	if (!character:GetInventory():HasItemOfBase("base_handheld_radio")) then
+		client:Notify("You don't have a radio")
+		return false
+	end
 
 	local bValidChannel = true
-	local radioChannel = client:GetCharacter():GetRadioChannel()
+	local radioChannel = character:GetRadioChannel()
 
 	-- Here, we don't want to return false immediately.
 	-- This is because when it comes to stationary radios, there is
